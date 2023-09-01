@@ -1,36 +1,27 @@
 const express = require("express");
-const morgan = require('morgan');
-const fs = require('fs');
-const path = require('path');
+const helmet = require('helmet');
 const cors = require("cors");
 
 const PORT = process.env.PORT || 3000;
 require("dotenv").config();
 
 const { db_connection } = require("./config/db");
+const {CategoryRouter} = require('./routes/category.route');
+const {ProductRouter} = require('./routes/product.route');
+const {UserRouter} = require('./routes/user.route');
 
 const app = express();
 app.use(cors());
+app.use(helmet());
 app.use(express.json());
+app.use("/category",CategoryRouter)
+app.use("/products",ProductRouter)
+app.use("/user",UserRouter)
 
 
 app.get("/", (req, res) => {
   res.send("HOME PAGE OF TRIVEOUS-ECOMMERCE APP");
 });
-
-const logsDir = path.join(__dirname, 'logs');
-if (!fs.existsSync(logsDir)) {
-  fs.mkdirSync(logsDir);
-}
-
-const logStream = fs.createWriteStream(path.join(__dirname, 'logs', 'access.log'), { flags: 'a' });
-app.use(
-  morgan('combined', {
-    stream: logStream,
-  })
-);
-
-
 
 app.listen(PORT, async () => {
   try {
