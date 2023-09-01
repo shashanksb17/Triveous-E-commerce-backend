@@ -9,6 +9,7 @@ const { db_connection } = require("./config/db");
 const {CategoryRouter} = require('./routes/category.route');
 const {ProductRouter} = require('./routes/product.route');
 const {UserRouter} = require('./routes/user.route');
+const {OrderRouter} = require('./routes/order.route');
 
 const app = express();
 app.use(cors());
@@ -17,6 +18,7 @@ app.use(express.json());
 app.use("/category",CategoryRouter)
 app.use("/products",ProductRouter)
 app.use("/user",UserRouter)
+app.use("/order",OrderRouter)
 
 
 app.get("/", (req, res) => {

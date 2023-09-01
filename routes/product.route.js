@@ -1,6 +1,6 @@
 const express = require('express');
 const ProductRouter = express.Router();
-const {getProductsByCategory, getProductDetails, addProduct,getAllProducts, updateProduct,deleteProduct} = require('../controllers/product.controller');
+const {getProductsByCategory, getProductDetails, addProduct,getAllProducts,deleteProduct} = require('../controllers/product.controller');
 
 ProductRouter.get('/ByCategory/:categoryId', getProductsByCategory);
 
